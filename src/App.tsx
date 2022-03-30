@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 
+type FilterType = "all" | "dollar" | "euro"
 function App() {
     const [money, setMoney] = useState([
         {banknote: "dollar", nominal: 500, number: "w453629474"},
@@ -9,7 +10,7 @@ function App() {
         {banknote: "dollar", nominal: 10, number: "w453629094"},
         {banknote: "dollar", nominal: 100, number: "p453629546"}
     ]);
-    const [filter, setFilter] = useState("all")
+    const [filter, setFilter] = useState<FilterType>("all")
     let newMoneyArray = money;
     if (filter === "dollar") {
         newMoneyArray = money.filter((someBanknote) => someBanknote.banknote === "dollar");
@@ -17,7 +18,7 @@ function App() {
     if (filter === "euro") {
         newMoneyArray = money.filter((someBanknote) => someBanknote.banknote === "euro");
     }
-    const onClickFilterHandler = (name: string) => {
+    const onClickFilterHandler = (name: FilterType) => {
         setFilter(name);
     }
     return (
@@ -35,8 +36,8 @@ function App() {
             </ul>
             <div style={{marginLeft: "30px"}}>
                 <button onClick={() => onClickFilterHandler("all")}> All currencies</button>
-                <button onClick={() => onClickFilterHandler("dollar")}> Only dollar</button>
-                <button onClick={() => onClickFilterHandler("euro")}> Only euro</button>
+                <button onClick={() => onClickFilterHandler("dollar")}> Only dollars</button>
+                <button onClick={() => onClickFilterHandler("euro")}> Only euros</button>
             </div>
         </>
     );
